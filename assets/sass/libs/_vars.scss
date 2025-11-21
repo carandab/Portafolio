@@ -1,0 +1,70 @@
+// Misc.
+	$misc: (
+		z-index-base:		10000
+	);
+
+// Duration.
+	$duration: (
+		transition:			0.2s
+	);
+
+// Size.
+	$size: (
+		border-radius:		8px,
+		border-radius-main:	0.25em,
+		element-height:		2.75em,
+		element-margin:		2em,
+		inner:				64em
+	);
+
+// Font.
+	$font: (
+		family:				('Source Sans Pro', Helvetica, sans-serif),
+		family-fixed:		('Courier New', monospace),
+		weight:				300,
+		weight-bold:		400,
+		letter-spacing:		-0.025em
+	);
+
+// Palette - DARK MINT TECH
+	$palette: (
+		// Backgrounds
+		bg:					#0f1419,			// Background principal (negro azulado)
+		bg-alt:				#1c2128,			// Background secundario (gris carbón)
+		
+		// Text colors
+		fg:					rgba(240, 246, 252, 0.75),	// Texto normal (#f0f6fc con opacidad)
+		fg-bold:			#f0f6fc,			// Texto bold (blanco frío)
+		fg-light:			rgba(240, 246, 252, 0.5),	// Texto claro
+		
+		// Borders
+		border:				rgba(87, 217, 163, 0.25),	// Border normal (verde menta con opacidad)
+		border-bg:			rgba(87, 217, 163, 0.1),	// Border background
+		border2:			rgba(87, 217, 163, 0.5),	// Border destacado
+		border2-bg:			rgba(87, 217, 163, 0.15),	// Border background destacado
+
+		// Inverted (para secciones claras - NO LAS USAREMOS MUCHO)
+		invert: (
+			bg:				#2d333b,			// Cards (gris oscuro)
+			bg-alt:			#1c2128,			// Background alternativo
+			fg:				#f0f6fc,			// Texto en cards
+			fg-bold:		#f0f6fc,			// Texto bold en cards
+			fg-light:		rgba(240, 246, 252, 0.5),	// Texto claro en cards
+			border:			rgba(87, 217, 163, 0.3),	// Bordes en cards
+			border-bg:		rgba(87, 217, 163, 0.1),	// Border background en cards
+			border2:		rgba(87, 217, 163, 0.5),	// Border destacado en cards
+			border2-bg:		rgba(87, 217, 163, 0.2),	// Border background destacado
+		),
+
+		// Accent colors - DARK MINT TECH
+		accent:				#57d9a3,			// Acento brillante (verde menta)
+		accent1:			#539bf5,			// Acento primario (azul GitHub)
+		accent2:			#46c593,			// Hover/Destacado (verde esmeralda)
+		accent3:			#57d9a3,			// Verde menta
+		accent4:			#539bf5,			// Azul GitHub
+		accent5:			#46c593,			// Verde esmeralda
+		
+		// Additional backgrounds
+		bg1:				#1c2128,			// Background secundario
+		bg2:				#2d333b				// Cards
+	);
