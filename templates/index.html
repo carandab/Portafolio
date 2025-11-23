@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Header -->
+<header id="header" class="container-fluid mt-2 text-center items-center">
+	<span class="logo"><img src="{% static 'images/james_baxter.png' %}" alt="Avatar de James Baxter" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" /></span>
+	<h1 class="my-1">Cristian Aranda</h1>
+	<p>Desarrollador Full Stack<br />
+	Python | Django | SQL | HTML | CSS | JavaScript | Bootstrap</p>
+
+	<div class="social-icons mt-4">
+		<a href="https://github.com/carandab" target="_blank" class="social-icon me-3" title="GitHub">
+			<i class="fab fa-github fa-2x"></i>
+		</a>
+		<a href="https://www.linkedin.com/in/cristian-arandab/" target="_blank" class="social-icon" title="LinkedIn">
+			<i class="fab fa-linkedin fa-2x"></i>
+		</a>
+ 		<a href="{% static 'CV_Cristian_Aranda_2025.pdf' %}" target="_blank"><i class="fa-regular fa-file social-icon fa-2x ms-3" title="Descargar CV"></i></a>
+	</div>
+</header>
+
+<!-- Introduccion -->
+
+<section id="introduccion" class="container my-2 mt-4">
+	<h2 class="mb-4 p-2">Quien soy:</h2>
+	<p class="text-center">Soy un profesional en reconversión hacia el área del TI. 
+		Recientemente certificado como desarrollador Full Stack Python, busco una oportunidad en una posición de junior dentro del mundo de la programación y el desarrollo de software.
+		<br /><br />
+		 Me gusta el área del desarrollo Back End y el manejo de bases de datos, pero también poseo habilidades en el ámbito del Front End.
+		 Tengo toda la disposición de seguir aprendiendo y mejorar mis habilidades dentro de un equipo de trabajo.</p>
+</section>
+
+<!-- Habilidades Técnicas -->
+
+<section id="habilidades-tecnicas" class="container my-2">
+	<h2 class="mb-4 p-2">Habilidades Técnicas</h2>
+	<div class="row">
+		{% for skill in technical_skills %}
+		<div class="col-md-4 mb-3">
+			<div class="card h-100">
+				<div class="card-body">
+					<h5 class="card-title">{{ skill.nombre }}</h5>
+					<p class="card-text">Experiencia: {{ skill.experiencia }} años</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+<!-- Habilidades Personales -->
+
+<section id="habilidades-personales" class="container my-2">
+	<h2 class="mb-4 p-2">Habilidades Personales</h2>
+	<div class="row">
+		{% for skill in personal_skills %}
+		<div class="col-md-4 mb-3">
+			<div class="card h-100">
+				<div class="card-body">
+					<h5 class="card-title">{{ skill.nombre }}</h5>
+					<p class="card-text">Experiencia: {{ skill.experiencia }} años</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+{% endblock %}

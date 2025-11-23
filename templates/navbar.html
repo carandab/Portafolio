@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand fw-bold" href="{% url 'index' %}">
+            <i class="fas fa-code me-2"></i>Portafolio
+        </a>
+
+        <!-- Botón del menú móvil -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menú de navegación -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Introducción</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'lista_proyectos' %}">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#habilidades-tecnicas">README</a>
+                </li>
+<!--                 <li class="nav-item">
+                    <a class="nav-link" href="#habilidades-personales">H. Personales</a>
+                </li>
+ -->                <li class="nav-item">
+                    <a class="nav-link" href="#contacto">CV</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Espaciador para compensar el navbar fixed -->
+<div style="height: 76px;"></div>
