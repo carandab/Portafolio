@@ -5,7 +5,48 @@ from .models import Project, Skill
 from .forms import ProjectForm
 
 def index(request):
-    return render(request, 'index.html')
+
+
+    # Obtener habilidades por tipo
+    frontend_skills = Skill.objects.filter(type='frontend')
+    backend_skills = Skill.objects.filter(type='backend')
+    database_skills = Skill.objects.filter(type='database')
+    softskills = Skill.objects.filter(type='softskill')
+    
+    context = {
+        'frontend_skills': frontend_skills,
+        'backend_skills': backend_skills,
+        'database_skills': database_skills,
+        'softskills': softskills,
+    }
+    
+    return render(request, 'index.html', context)
+
+# CRUD Habilidades
+
+def create_skill(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        type = request.POST.get("type")
+        Skill.objects.create(name=name, type=type)
+        return redirect("index")
+    return render(request, "recursos/skill_form.html")
+
+def update_skill(request, pk):
+    skill = get_object_or_404(Skill, pk=pk)
+    if request.method == "POST":
+        skill.name = request.POST.get("name")
+        skill.type = request.POST.get("type")
+        skill.save()
+        return redirect("index")
+    return render(request, "recursos/skill_form.html", {"skill": skill})
+
+def delete_skill(request, pk):
+    skill = get_object_or_404(Skill, pk=pk)
+    if request.method == "POST":
+        skill.delete()
+        return redirect("index")
+    return render(request, "recursos/skill_confirm_delete.html", {"skill": skill})
 
 # LISTA DE PROYECTOS
 def project_list(request):

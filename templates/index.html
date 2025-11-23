@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Cristian Aranda - Portafolio{% endblock %}
+{% block extra_css %}<link href="{% static 'css/index.css' %}" rel="stylesheet">{% endblock %}
 {% block content %}
 
 <!-- Header -->
@@ -7,7 +9,7 @@
 	<span class="logo"><img src="{% static 'images/james_baxter.png' %}" alt="Avatar de James Baxter" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" /></span>
 	<h1 class="my-1">Cristian Aranda</h1>
 	<p>Desarrollador Full Stack<br />
-	Python | Django | SQL | HTML | CSS | JavaScript | Bootstrap</p>
+	Python | Django | SQL | Bootstrap</p>
 
 	<div class="social-icons mt-4">
 		<a href="https://github.com/carandab" target="_blank" class="social-icon me-3" title="GitHub">
@@ -33,37 +35,92 @@
 
 <!-- Habilidades Técnicas -->
 
-<section id="habilidades-tecnicas" class="container my-2">
-	<h2 class="mb-4 p-2">Habilidades Técnicas</h2>
-	<div class="row">
-		{% for skill in technical_skills %}
-		<div class="col-md-4 mb-3">
-			<div class="card h-100">
-				<div class="card-body">
-					<h5 class="card-title">{{ skill.nombre }}</h5>
-					<p class="card-text">Experiencia: {{ skill.experiencia }} años</p>
+<section id="habilidades-tecnicas" class="container my-5">
+	<h2 class="text-center mb-4">Habilidades Técnicas</h2>
+	<p class="text-center text-secondary mb-5">Tecnologías y herramientas con las que trabajo</p>
+
+	<!-- Front End Skills -->
+	{% if frontend_skills %}
+	<div class="skills-category mb-5">
+		<h3 class="text-center mb-4">Front End</h3>
+		<div class="row g-0 justify-content-center">
+			{% for skill in frontend_skills %}
+			<div class="col-6 col-md-4 col-lg-2">
+				<div class="skill-card skill-card-frontend">
+					{% if skill.image %}
+						<img src="{{ skill.image.url }}" alt="{{ skill.name }}" class="skill-image">
+					{% elif skill.icon %}
+						<i class="{{ skill.icon }} skill-icon"></i>
+					{% endif %}
+					<h5 class="skill-name">{{ skill.name }}</h5>
 				</div>
 			</div>
+			{% endfor %}
 		</div>
-		{% endfor %}
 	</div>
-</section>
+	{% endif %}
 
-<!-- Habilidades Personales -->
-
-<section id="habilidades-personales" class="container my-2">
-	<h2 class="mb-4 p-2">Habilidades Personales</h2>
-	<div class="row">
-		{% for skill in personal_skills %}
-		<div class="col-md-4 mb-3">
-			<div class="card h-100">
-				<div class="card-body">
-					<h5 class="card-title">{{ skill.nombre }}</h5>
-					<p class="card-text">Experiencia: {{ skill.experiencia }} años</p>
+	<!-- Back End Skills -->
+	{% if backend_skills %}
+	<div class="skills-category mb-5">
+		<h3 class="text-center mb-4">Back End</h3>
+		<div class="row g-0 justify-content-center">
+			{% for skill in backend_skills %}
+			<div class="col-6 col-md-4 col-lg-2">
+				<div class="skill-card skill-card-backend">
+					{% if skill.image %}
+						<img src="{{ skill.image.url }}" alt="{{ skill.name }}" class="skill-image">
+					{% elif skill.icon %}
+						<i class="{{ skill.icon }} skill-icon"></i>
+					{% endif %}
+					<h5 class="skill-name">{{ skill.name }}</h5>
 				</div>
 			</div>
+			{% endfor %}
 		</div>
-		{% endfor %}
 	</div>
+	{% endif %}
+
+	<!-- Database Skills -->
+	{% if database_skills %}
+	<div class="skills-category mb-5">
+		<h3 class="text-center mb-4">Bases de Datos</h3>
+		<div class="row g-0 justify-content-center">
+			{% for skill in database_skills %}
+			<div class="col-6 col-md-4 col-lg-2">
+				<div class="skill-card skill-card-database">
+					{% if skill.image %}
+						<img src="{{ skill.image.url }}" alt="{{ skill.name }}" class="skill-image">
+					{% elif skill.icon %}
+						<i class="{{ skill.icon }} skill-icon"></i>
+					{% endif %}
+					<h5 class="skill-name">{{ skill.name }}</h5>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+
+	<!-- Soft Skills -->
+	{% if softskills %}
+	<div class="skills-category mb-5">
+		<h3 class="text-center mb-4">Habilidades Blandas</h3>
+		<div class="row g-0 justify-content-center">
+			{% for skill in softskills %}
+			<div class="col-6 col-md-4 col-lg-2">
+				<div class="skill-card skill-card-softskill">
+					{% if skill.image %}
+						<img src="{{ skill.image.url }}" alt="{{ skill.name }}" class="skill-image">
+					{% elif skill.icon %}
+						<i class="{{ skill.icon }} skill-icon"></i>
+					{% endif %}
+					<h5 class="skill-name">{{ skill.name }}</h5>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
 </section>
 {% endblock %}

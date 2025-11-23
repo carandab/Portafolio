@@ -3,7 +3,8 @@ from django.db import models
     
 class Skill(models.Model):
     
-    icon = models.CharField(max_length=100)  # Ingresar FontAwesome class name
+    image = models.ImageField(upload_to='skills/', blank=True, null=True)
+    icon = models.CharField(max_length=100, blank=True, null=True)  # Ingresar FontAwesome class name
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=100,
             choices=[

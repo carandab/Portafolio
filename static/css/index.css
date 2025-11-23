@@ -1,0 +1,171 @@
+/* =============   HABILIDADES TÉCNICAS - SKILL CARDS   ============= */
+
+.skills-category {
+    margin-bottom: 3rem;
+}
+
+.skills-category h3 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.skills-category h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--accent-primary);
+    border-radius: 2px;
+}
+
+.skill-card {
+    padding: 2rem 1rem;
+    text-align: center;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    cursor: default;
+    min-height: 160px; /* ALTURA MÍNIMA FIJA */
+    height: 160px;     /* ALTURA FIJA PARA TODAS */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Estilos para imágenes en skills */
+.skill-image {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+    filter: brightness(0) invert(1); /* Hace las imágenes blancas */
+}
+
+.skill-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: #ffffff;
+}
+
+/* Colores apagados para Front End - Tonos morados/violetas desaturados */
+.skill-card-frontend {
+    background: linear-gradient(135deg, #4a5568 0%, #5a4a6f 100%);
+}
+
+.skill-card-frontend:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(74, 85, 104, 0.3);
+    background: linear-gradient(135deg, #5a6678 0%, #6a5a7f 100%);
+}
+
+.skill-card-frontend:hover .skill-icon,
+.skill-card-frontend:hover .skill-image {
+    transform: scale(1.1);
+}
+
+/* Colores apagados para Back End - Tonos verdes desaturados */
+.skill-card-backend {
+    background: linear-gradient(135deg, #2d6a5f 0%, #3a7f6f 100%);
+}
+
+.skill-card-backend:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(45, 106, 95, 0.3);
+    background: linear-gradient(135deg, #3d7a6f 0%, #4a8f7f 100%);
+}
+
+.skill-card-backend:hover .skill-icon,
+.skill-card-backend:hover .skill-image {
+    transform: scale(1.1);
+}
+
+/* Colores apagados para Databases - Tonos azules desaturados */
+.skill-card-database {
+    background: linear-gradient(135deg, #2d5a7f 0%, #3d6a8f 100%);
+}
+
+.skill-card-database:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(45, 90, 127, 0.3);
+    background: linear-gradient(135deg, #3d6a8f 0%, #4d7a9f 100%);
+}
+
+.skill-card-database:hover .skill-icon,
+.skill-card-database:hover .skill-image {
+    transform: scale(1.1);
+}
+
+/* Colores apagados para Soft Skills - Tonos rosa/coral desaturados */
+.skill-card-softskill {
+    background: linear-gradient(135deg, #7f5a6a 0%, #8f6a7a 100%);
+}
+
+.skill-card-softskill:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(127, 90, 106, 0.3);
+    background: linear-gradient(135deg, #8f6a7a 0%, #9f7a8a 100%);
+}
+
+.skill-card-softskill:hover .skill-icon,
+.skill-card-softskill:hover .skill-image {
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .skill-card {
+        padding: 1.5rem 0.75rem;
+        min-height: 140px;
+        height: 140px;
+    }
+    
+    .skill-icon {
+        font-size: 2.5rem;
+    }
+    
+    .skill-image {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .skill-name {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .skill-card {
+        padding: 1.25rem 0.5rem;
+        min-height: 130px;
+        height: 130px;
+    }
+    
+    .skill-icon {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .skill-image {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .skill-name {
+        font-size: 0.85rem;
+    }
+}
