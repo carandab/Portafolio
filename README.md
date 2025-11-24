@@ -74,22 +74,6 @@ Portafolio profesional desarrollado con Django que muestra mis proyectos, habili
 
 ---
 
-## 📸 Capturas de Pantalla
-
-### Vista Principal
-![Página Principal](docs/screenshots/home.png)
-
-### Grid de Proyectos
-![Proyectos](docs/screenshots/projects.png)
-
-### Modal de Detalle
-![Modal](docs/screenshots/modal.png)
-
-### Panel Admin
-![Admin](docs/screenshots/admin.png)
-
----
-
 ## 📖 Uso
 
 ### Panel de Administración
