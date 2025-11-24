@@ -241,13 +241,36 @@ section {
 }
 
 
-.admin-gear {
+/* Hacer que el botón de logout se vea como un icono */
+.logout-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
     color: var(--text-muted);
     font-size: 1.2rem;
     transition: all 0.3s ease;
 }
 
-.admin-gear:hover {
+.logout-btn:hover {
+    color: var(--accent-primary);
+    transform: translateX(3px);
+}
+
+.admin-icons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.admin-icon {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.admin-icon:hover {
     color: var(--accent-primary);
     transform: rotate(90deg);
 }

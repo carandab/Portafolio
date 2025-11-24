@@ -1,12 +1,164 @@
 {% extends "base.html" %}
-{% block contenido %}
+{% load static %}
 
-<h2>Crear Proyecto</h2>
+{% block title %}{% if form.instance.pk %}Editar{% else %}Crear{% endif %} Proyecto - Cristian Aranda{% endblock %}
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-success">Guardar</button>
-</form>
+{% block extra_css %}
+    <link href="{% static 'css/projects.css' %}" rel="stylesheet">
+    <link href="{% static 'css/forms.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<!-- Header del formulario -->
+<section class="form-header py-5 text-center">
+    <div class="container">
+        <h1 class="display-4 mb-3">
+            {% if form.instance.pk %}
+                <i class="fas fa-edit me-3"></i>Editar Proyecto
+            {% else %}
+                <i class="fas fa-plus me-3"></i>Crear Nuevo Proyecto
+            {% endif %}
+        </h1>
+        <p class="lead text-secondary">
+            {% if form.instance.pk %}
+                Actualiza la información de tu proyecto
+            {% else %}
+                Agrega un nuevo proyecto a tu portafolio
+            {% endif %}
+        </p>
+    </div>
+</section>
+
+<!-- Formulario -->
+<section class="form-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-card">
+                    
+                    <!-- Mostrar errores del formulario -->
+                    {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <h5 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i>Errores en el formulario</h5>
+                        <ul class="mb-0">
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                    
+                    <form method="POST" enctype="multipart/form-data" class="project-form">
+                        {% csrf_token %}
+                        
+                        <!-- Información Básica -->
+                        <div class="form-section-title">
+                            <i class="fas fa-info-circle me-2"></i>Información Básica
+                        </div>
+                        
+                        <!-- Título -->
+                        <div class="mb-4">
+                            <label for="{{ form.title.id_for_label }}" class="form-label">
+                                Título del Proyecto <span class="text-danger">*</span>
+                            </label>
+                            {{ form.title }}
+                            {% if form.title.help_text %}
+                            <div class="form-text">{{ form.title.help_text }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Descripción -->
+                        <div class="mb-4">
+                            <label for="{{ form.description.id_for_label }}" class="form-label">
+                                Descripción <span class="text-danger">*</span>
+                            </label>
+                            {{ form.description }}
+                            {% if form.description.help_text %}
+                            <div class="form-text">{{ form.description.help_text }}</div>
+                            {% endif %}
+                            <div class="form-text">Describe las características principales del proyecto, tecnologías usadas y tu rol en el desarrollo.</div>
+                        </div>
+                        
+                        <!-- Imagen Principal -->
+                        <div class="mb-4">
+                            <label for="{{ form.image.id_for_label }}" class="form-label">
+                                Imagen Principal <span class="text-danger">*</span>
+                            </label>
+                            
+                            <!-- Preview de imagen actual si existe -->
+                            {% if form.instance.image %}
+                            <div class="current-image mb-3">
+                                <p class="text-muted mb-2">Imagen actual:</p>
+                                <img src="{{ form.instance.image.url }}" alt="Imagen actual" class="img-thumbnail" style="max-height: 200px;">
+                                <p class="form-text mt-2">Sube una nueva imagen para reemplazarla</p>
+                            </div>
+                            {% endif %}
+                            
+                            {{ form.image }}
+                            <div class="form-text">Recomendado: 1200x720px (16:9), formato JPG o PNG, máximo 2MB</div>
+                        </div>
+                        
+                        <!-- Enlaces -->
+                        <div class="form-section-title mt-5">
+                            <i class="fas fa-link me-2"></i>Enlaces
+                        </div>
+                        
+                        <div class="row">
+                            <!-- URL de Demo -->
+                            <div class="col-md-6 mb-4">
+                                <label for="{{ form.host_url.id_for_label }}" class="form-label">
+                                    <i class="fas fa-external-link-alt me-2"></i>URL de Demo
+                                </label>
+                                {{ form.host_url }}
+                                <div class="form-text">Link al proyecto desplegado (Render, Vercel, etc.)</div>
+                            </div>
+                            
+                            <!-- URL de GitHub -->
+                            <div class="col-md-6 mb-4">
+                                <label for="{{ form.github_url.id_for_label }}" class="form-label">
+                                    <i class="fab fa-github me-2"></i>URL de GitHub
+                                </label>
+                                {{ form.github_url }}
+                                <div class="form-text">Link al repositorio del código fuente</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tecnologías -->
+                        <div class="form-section-title mt-4">
+                            <i class="fas fa-code me-2"></i>Tecnologías Utilizadas
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="{{ form.skills.id_for_label }}" class="form-label">
+                                Selecciona las tecnologías
+                            </label>
+                            {{ form.skills }}
+                            <div class="form-text">Mantén presionada la tecla Ctrl (Cmd en Mac) para seleccionar múltiples opciones</div>
+                        </div>
+                        
+                        <!-- Botones de acción -->
+                        <div class="form-actions mt-5">
+                            <button type="submit" class="btn btn-primary-custom btn-lg">
+                                <i class="fas fa-save me-2"></i>
+                                {% if form.instance.pk %}Actualizar{% else %}Crear{% endif %} Proyecto
+                            </button>
+                            <a href="{% url 'lista_proyectos' %}" class="btn btn-secondary-custom btn-lg">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
+

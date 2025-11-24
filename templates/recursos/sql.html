@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Consulta SQL - Proyectos y Skills{% endblock %}
+
+{% block extra_css %}
+    <link href="{% static 'css/sql.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<section class="sql-header py-5 text-center">
+    <div class="container">
+        <h1 class="display-4 mb-3">
+            <i class="fas fa-database me-3"></i>Consulta SQL
+        </h1>
+        <p class="lead text-secondary">
+            Proyectos con sus tecnologías asociadas
+        </p>
+    </div>
+</section>
+
+<section class="sql-results py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                
+                <!-- Información de la consulta -->
+                <div class="query-info mb-4">
+                    <h5 class="mb-3">
+                        <i class="fas fa-code me-2"></i>Consulta Ejecutada:
+                    </h5>
+                    <pre class="sql-code"><code>SELECT p.id, p.title, s.name, s.type
+FROM recursos_project p
+JOIN recursos_project_skills ps ON p.id = ps.project_id
+JOIN recursos_skill s ON s.id = ps.skill_id
+ORDER BY p.published_at DESC;</code></pre>
+                    <p class="text-muted mt-2">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Total de resultados: <strong>{{ resultados|length }}</strong>
+                    </p>
+                </div>
+                
+                <!-- Tabla de resultados -->
+                {% if resultados %}
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-bordered">
+                        <thead class="table-header">
+                            <tr>
+                                <th>ID Proyecto</th>
+                                <th>Título del Proyecto</th>
+                                <th>Skill</th>
+                                <th>Tipo de Skill</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for resultado in resultados %}
+                            <tr>
+                                <td class="text-center">{{ resultado.0 }}</td>
+                                <td><strong>{{ resultado.1 }}</strong></td>
+                                <td>
+                                    <span class="skill-name">{{ resultado.2 }}</span>
+                                </td>
+                                <td>
+                                    <span class="badge-skill badge-{{ resultado.3 }}">
+                                        {{ resultado.3|title }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    No hay resultados para mostrar.
+                </div>
+                {% endif %}
+                
+                <!-- Botón volver -->
+                <div class="text-center mt-4">
+                    <a href="{% url 'lista_proyectos' %}" class="btn btn-primary-custom btn-lg">
+                        <i class="fas fa-arrow-left me-2"></i>Volver a Proyectos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

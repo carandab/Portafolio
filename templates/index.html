@@ -25,7 +25,7 @@
 <!-- Introduccion -->
 
 <section id="introduccion" class="container my-2 mt-4">
-	<h2 class="mb-4 p-2">Quien soy:</h2>
+	<h2 class="mb-4 p-2">Quién soy:</h2>
 	<p class="text-center">Soy un profesional en reconversión hacia el área del TI. 
 		Recientemente certificado como desarrollador Full Stack Python, busco una oportunidad en una posición de junior dentro del mundo de la programación y el desarrollo de software.
 		<br /><br />
@@ -38,27 +38,6 @@
 <section id="habilidades-tecnicas" class="container my-5">
 	<h2 class="text-center mb-4">Habilidades Técnicas</h2>
 	<p class="text-center text-secondary mb-5">Tecnologías y herramientas con las que trabajo</p>
-
-	<!-- Front End Skills -->
-	{% if frontend_skills %}
-	<div class="skills-category mb-5">
-		<h3 class="text-center mb-4">Front End</h3>
-		<div class="row g-0 justify-content-center">
-			{% for skill in frontend_skills %}
-			<div class="col-6 col-md-4 col-lg-2">
-				<div class="skill-card skill-card-frontend">
-					{% if skill.image %}
-						<img src="{{ skill.image.url }}" alt="{{ skill.name }}" class="skill-image">
-					{% elif skill.icon %}
-						<i class="{{ skill.icon }} skill-icon"></i>
-					{% endif %}
-					<h5 class="skill-name">{{ skill.name }}</h5>
-				</div>
-			</div>
-			{% endfor %}
-		</div>
-	</div>
-	{% endif %}
 
 	<!-- Back End Skills -->
 	{% if backend_skills %}
@@ -102,13 +81,35 @@
 	</div>
 	{% endif %}
 
+		<!-- Front End Skills -->
+	{% if frontend_skills %}
+	<div class="skills-category mb-5">
+		<h3 class="text-center mb-4">Front End</h3>
+		<div class="row g-0 justify-content-center">
+			{% for skill in frontend_skills %}
+			<div class="col-6 col-md-4 col-lg-2">
+				<div class="skill-card skill-card-frontend">
+					{% if skill.image %}
+						<img src="{{ skill.image.url }}" alt="{{ skill.name }}" class="skill-image">
+					{% elif skill.icon %}
+						<i class="{{ skill.icon }} skill-icon"></i>
+					{% endif %}
+					<h5 class="skill-name">{{ skill.name }}</h5>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+
+
 	<!-- Soft Skills -->
 	{% if softskills %}
 	<div class="skills-category mb-5">
 		<h3 class="text-center mb-4">Habilidades Blandas</h3>
 		<div class="row g-0 justify-content-center">
 			{% for skill in softskills %}
-			<div class="col-6 col-md-4 col-lg-2">
+			<div class="col-6 col-sm-4 col-md-3">
 				<div class="skill-card skill-card-softskill">
 					{% if skill.image %}
 						<img src="{{ skill.image.url }}" alt="{{ skill.name }}" class="skill-image">

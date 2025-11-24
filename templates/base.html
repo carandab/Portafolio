@@ -111,9 +111,20 @@
 						<p class="mb-0 text-secondary">
 							&copy; {% now "Y" %} Cristian Aranda. Todos los derechos reservados.
 						</p>
-						<a class="admin-gear" href="{% url 'admin:index' %}">
-							<i class="fa-solid fa-gear"></i>
-						</a>
+						<div class="admin-icons d-flex gap-3">
+							<a class="admin-icon" href="{% url 'admin:index' %}" title="Panel Admin" target="_blank">
+								<i class="fa-solid fa-gear"></i>
+							</a>
+						{% if user.is_authenticated %}
+							<!-- Formulario de logout disfrazado -->
+							<form method="POST" action="{% url 'logout' %}" style="display: inline;">
+								{% csrf_token %}
+								<button type="submit" class="logout-btn" title="Cerrar Sesión">
+									<i class="fa-solid fa-right-from-bracket"></i>
+								</button>
+							</form>
+						{% endif %}
+						</div>
 					</div>
 				</div>
 			</div>

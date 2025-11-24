@@ -1,23 +1,219 @@
 {% extends "base.html" %}
 {% load static %}
-{% block contenido %}
 
-<h2 class="mb-4">Proyectos</h2>
+{% block title %}Proyectos - Cristian Aranda{% endblock %}
 
-<div class="row">
-    {% for p in projects %}
-    <div class="col-md-4">
-        <div class="card mb-3">
-            {% if p.imagen %}
-            <img src="{{ p.image.url }}" class="card-img-top">
-            {% endif %}
-            <div class="card-body">
-                <h5 class="card-title">{{ p.title }}</h5>
-                <a href="{{ p.id }}/" class="btn btn-primary">Ver Detalles</a>
-            </div>
-        </div>
+{% block extra_css %}
+    <link href="{% static 'css/projects.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<!-- Header de Proyectos -->
+<section class="projects-header py-5 text-center">
+    <div class="container">
+        <h1 class="display-4 mb-3">Mis Proyectos</h1>
+        <p class="lead text-secondary">
+            Una colección de proyectos que demuestran mis habilidades en desarrollo web Full Stack
+        </p>
     </div>
-    {% endfor %}
-</div>
+</section>
+
+<!-- Grid de Proyectos -->
+<section class="projects-grid py-5">
+    <div class="container">
+        {% if proyectos %}
+            <div class="row g-4">
+                {% for proyecto in proyectos %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <!-- Imagen del proyecto -->
+                        <div class="project-image-container">
+                            {% if proyecto.image %}
+                                <img src="{{ proyecto.image.url }}" 
+                                     alt="{{ proyecto.title }}" 
+                                     class="project-image">
+                            {% else %}
+                                <div class="project-image-placeholder">
+                                    <i class="fas fa-code fa-3x"></i>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Overlay con botón "Ver Proyecto" -->
+                            <div class="project-overlay" data-bs-toggle="modal" data-bs-target="#projectModal{{ proyecto.id }}">
+                                <button class="btn btn-view-project">
+                                    <i class="fas fa-eye me-2"></i>Ver Proyecto
+                                </button>
+                            </div>
+                            
+                            <!-- Botones de administración (solo si está autenticado) -->
+                            {% if user.is_authenticated %}
+                            <div class="admin-buttons">
+                                <a href="{% url 'editar_proyecto' proyecto.pk %}" 
+                                   class="btn btn-admin btn-edit"
+                                   title="Editar proyecto"
+                                   onclick="event.stopPropagation();">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{% url 'eliminar_proyecto' proyecto.pk %}" 
+                                   class="btn btn-admin btn-delete"
+                                   title="Eliminar proyecto"
+                                   onclick="event.stopPropagation();">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Contenido del proyecto -->
+                        <div class="project-content">
+                            <h3 class="project-title">{{ proyecto.title }}</h3>
+                            
+                            <p class="project-description">
+                                {{ proyecto.description|truncatewords:20 }}
+                            </p>
+                            
+                            <!-- Habilidades/Tecnologías usadas -->
+                            {% if proyecto.skills.all %}
+                            <div class="project-skills">
+                                {% for skill in proyecto.skills.all|slice:":4" %}
+                                <span class="skill-badge">
+                                    {% if skill.icon %}
+                                        <i class="{{ skill.icon }}"></i>
+                                    {% endif %}
+                                    {{ skill.name }}
+                                </span>
+                                {% endfor %}
+                                {% if proyecto.skills.count > 4 %}
+                                <span class="skill-badge">+{{ proyecto.skills.count|add:"-4" }}</span>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Footer con botones (siempre visible) -->
+                        <div class="project-footer">
+                            {% if proyecto.host_url %}
+                            <a href="{{ proyecto.host_url }}" 
+                               target="_blank" 
+                               class="btn btn-footer-action {% if not proyecto.github_url %}btn-footer-full{% endif %}"
+                               onclick="event.stopPropagation();"
+                               title="Ver demo en vivo">
+                                <i class="fas fa-external-link-alt me-2"></i>Demo
+                            </a>
+                            {% endif %}
+                            
+                            {% if proyecto.github_url %}
+                            <a href="{{ proyecto.github_url }}" 
+                               target="_blank" 
+                               class="btn btn-footer-action {% if not proyecto.host_url %}btn-footer-full{% endif %}"
+                               onclick="event.stopPropagation();"
+                               title="Ver código fuente">
+                                <i class="fab fa-github me-2"></i>GitHub
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Modal para este proyecto -->
+                <div class="modal fade" id="projectModal{{ proyecto.id }}" tabindex="-1" aria-labelledby="projectModalLabel{{ proyecto.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="projectModalLabel{{ proyecto.id }}">
+                                    {{ proyecto.title }}
+                                </h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Imagen del proyecto en el modal -->
+                                {% if proyecto.image %}
+                                <div class="modal-project-image mb-4">
+                                    <img src="{{ proyecto.image.url }}" 
+                                         alt="{{ proyecto.title }}" 
+                                         class="img-fluid rounded">
+                                </div>
+                                {% endif %}
+                                
+                                <!-- Descripción completa -->
+                                <h6 class="text-primary-custom mb-3">Descripción</h6>
+                                <p class="text-secondary mb-4">{{ proyecto.description }}</p>
+                                
+                                <!-- Tecnologías utilizadas -->
+                                {% if proyecto.skills.all %}
+                                <h6 class="text-primary-custom mb-3">Tecnologías Utilizadas</h6>
+                                <div class="modal-skills mb-4">
+                                    {% for skill in proyecto.skills.all %}
+                                    <span class="skill-badge-modal">
+                                        {% if skill.icon %}
+                                            <i class="{{ skill.icon }} me-1"></i>
+                                        {% endif %}
+                                        {{ skill.name }}
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                                
+                                <!-- Fecha de publicación -->
+                                <p class="text-muted mb-0">
+                                    <i class="far fa-calendar me-2"></i>
+                                    Publicado: {{ proyecto.published_at|date:"d/m/Y" }}
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                {% if proyecto.host_url %}
+                                <a href="{{ proyecto.host_url }}" 
+                                   target="_blank" 
+                                   class="btn btn-primary-custom">
+                                    <i class="fas fa-external-link-alt me-2"></i>Ver Demo
+                                </a>
+                                {% endif %}
+                                
+                                {% if proyecto.github_url %}
+                                <a href="{{ proyecto.github_url }}" 
+                                   target="_blank" 
+                                   class="btn btn-secondary-custom">
+                                    <i class="fab fa-github me-2"></i>Ver Código
+                                </a>
+                                {% endif %}
+                                
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- Mensaje cuando no hay proyectos -->
+            <div class="text-center py-5">
+                <i class="fas fa-folder-open fa-5x text-muted mb-4"></i>
+                <h3 class="text-muted">No hay proyectos aún</h3>
+                <p class="text-secondary">Los proyectos aparecerán aquí una vez que se agreguen.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 text-center">
+    <div class="container">
+        <h2 class="mb-3">¿Tienes un proyecto en mente?</h2>
+        <p class="lead text-secondary mb-4">
+            Estoy disponible para colaboraciones y nuevas oportunidades
+        </p>
+        <a href="mailto:c.aranda.borquez@gmail.com" class="btn btn-primary-custom btn-lg">
+            <i class="fas fa-envelope me-2"></i>Contáctame
+        </a>
+    </div>
+</section>
+
+<!-- Botón flotante para agregar proyecto (solo si está autenticado) -->
+{% if user.is_authenticated %}
+<a href="{% url 'crear_proyecto' %}" class="btn-floating" title="Agregar Proyecto">
+    <i class="fas fa-plus"></i>
+</a>
+{% endif %}
 
 {% endblock %}

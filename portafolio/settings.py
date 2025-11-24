@@ -13,8 +13,9 @@ SECRET_KEY = 'django-insecure-(0#ohzhk)x8enoytoed1nrs91g3)$&aa_x6g@eq8zqgzc01-0g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['portafolio-cristian-aranda.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['portafolio-cristian-aranda.onrender.com', '127.0.0.1']
 
+LOGOUT_REDIRECT_URL = 'index'
 
 # Application definition
 

@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Eliminar Proyecto - Cristian Aranda{% endblock %}
+
+{% block extra_css %}
+    <link href="{% static 'css/projects.css' %}" rel="stylesheet">
+    <link href="{% static 'css/forms.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<!-- Header de advertencia -->
+<section class="delete-header py-5 text-center">
+    <div class="container">
+        <div class="warning-icon mb-3">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h1 class="display-4 mb-3">¿Eliminar Proyecto?</h1>
+        <p class="lead text-secondary">
+            Esta acción no se puede deshacer
+        </p>
+    </div>
+</section>
+
+<!-- Formulario de confirmación -->
+<section class="delete-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="delete-card">
+                    
+                    <!-- Preview del proyecto a eliminar -->
+                    <div class="project-preview mb-4">
+                        {% if object.image %}
+                        <img src="{{ object.image.url }}" alt="{{ object.title }}" class="preview-image mb-3">
+                        {% endif %}
+                        
+                        <h3 class="project-title-delete">{{ object.title }}</h3>
+                        
+                        <p class="project-description-delete">
+                            {{ object.description|truncatewords:30 }}
+                        </p>
+                        
+                        <!-- Info adicional -->
+                        <div class="project-info-delete">
+                            {% if object.skills.all %}
+                            <div class="mb-2">
+                                <i class="fas fa-code me-2"></i>
+                                <strong>Tecnologías:</strong> 
+                                {% for skill in object.skills.all|slice:":5" %}
+                                    {{ skill.name }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                                {% if object.skills.count > 5 %}
+                                    y {{ object.skills.count|add:"-5" }} más
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            
+                            <div class="mb-2">
+                                <i class="far fa-calendar me-2"></i>
+                                <strong>Publicado:</strong> {{ object.published_at|date:"d/m/Y" }}
+                            </div>
+                            
+                            {% if object.gallery_images.all %}
+                            <div class="mb-2">
+                                <i class="far fa-images me-2"></i>
+                                <strong>Galería:</strong> {{ object.gallery_images.count }} imagen{% if object.gallery_images.count != 1 %}es{% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Advertencia -->
+                    <div class="alert alert-warning-custom mb-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Importante:</strong> Al eliminar este proyecto se borrarán:
+                        <ul class="mb-0 mt-2">
+                            <li>Toda la información del proyecto</li>
+                            <li>La imagen principal</li>
+                            {% if object.gallery_images.all %}
+                            <li>Las {{ object.gallery_images.count }} imagen{% if object.gallery_images.count != 1 %}es{% endif %} de la galería</li>
+                            {% endif %}
+                            <li>Las relaciones con tecnologías</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Formulario de confirmación -->
+                    <form method="POST" class="delete-form">
+                        {% csrf_token %}
+                        
+                        <div class="delete-actions">
+                            <button type="submit" class="btn btn-danger-custom btn-lg">
+                                <i class="fas fa-trash me-2"></i>Sí, Eliminar Proyecto
+                            </button>
+                            <a href="{% url 'lista_proyectos' %}" class="btn btn-secondary-custom btn-lg">
+                                <i class="fas fa-arrow-left me-2"></i>No, Volver Atrás
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
