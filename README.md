@@ -3,7 +3,8 @@
 [![Django](https://img.shields.io/badge/Django-5.2-092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+
 
 Portafolio profesional desarrollado con Django que muestra mis proyectos, habilidades técnicas y experiencia como Full Stack Developer. Este proyecto fue creado como parte de mi transición profesional desde Trabajo Social hacia el desarrollo de software.
 
@@ -166,6 +167,7 @@ Ruta `/proyectos/sql/` muestra:
 - Consulta SQL ejecutada
 - Tabla con resultados formateados
 - Relación proyectos-skills mediante JOIN
+Este fue un requisito dentro de la actividad del bootcamp para demostrar manejo de base de datos
 
 ### 4. Admin Mejorado
 - Inline para gestionar imágenes de galería (preparado para carrusel futuro)

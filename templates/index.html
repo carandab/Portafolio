@@ -35,7 +35,7 @@
 
 <!-- Habilidades Técnicas -->
 
-<section id="habilidades-tecnicas" class="container my-5">
+<section id="habilidades-tecnicas" class="container mt-5">
 	<h2 class="text-center mb-4">Habilidades Técnicas</h2>
 	<p class="text-center text-secondary mb-5">Tecnologías y herramientas con las que trabajo</p>
 
@@ -102,11 +102,14 @@
 	</div>
 	{% endif %}
 
+</section>
 
+<section id="habilidades-blandas" class="container">
+	<h2 class="text-center mb-4">Habilidades Blandas</h2>
+	<p class="text-center text-secondary mb-5">Cualidades personales que definen mi enfoque y mi contribución al equipo.</p>
 	<!-- Soft Skills -->
 	{% if softskills %}
 	<div class="skills-category mb-5">
-		<h3 class="text-center mb-4">Habilidades Blandas</h3>
 		<div class="row g-0 justify-content-center">
 			{% for skill in softskills %}
 			<div class="col-6 col-sm-4 col-md-3">

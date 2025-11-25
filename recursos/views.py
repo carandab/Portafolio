@@ -128,7 +128,7 @@ def consulta_sql(request):
 
 # README VIEW
 def readme_view(request):
-    readme_path = os.path.join(settings.BASE_DIR, 'README.md')
+    readme_path = os.path.join(settings.BASE_DIR, 'Profile_README.md')
     
     try:
         with open(readme_path, 'r', encoding='utf-8', errors='ignore') as file:
