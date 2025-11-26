@@ -9,6 +9,8 @@
 Portafolio profesional desarrollado con Django que muestra mis proyectos, habilidades técnicas y experiencia como Full Stack Developer. Este proyecto fue creado como parte de mi transición profesional desde Trabajo Social hacia el desarrollo de software.
 
 🌐 **[Ver Demo en Vivo](https://portafolio-cristian-aranda.onrender.com/)**
+🌐 **[Ver Video Explicativo](https://youtu.be/AL3Ya4vich0)**
+
 
 ---
 
