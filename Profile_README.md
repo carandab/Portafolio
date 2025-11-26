@@ -56,6 +56,7 @@ Plataforma e-commerce completa para productos de mascotas
 - **Tech:** Django, PostgreSQL, Bootstrap, JavaScript
 - **Features:** Gestión de productos, carrito de compras, autenticación
 - **[Ver Demo →](https://gowest-petshop.onrender.com/)**
+- **[Video Explicativo →](https://www.youtube.com/watch?v=4AGin_MnuFM)**
 
 ### 💼 [Portafolio Personal](https://github.com/carandab/Portafolio)
 Portafolio profesional con CRUD y panel de administración
