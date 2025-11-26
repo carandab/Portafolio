@@ -206,6 +206,7 @@ Las contribuciones son bienvenidas. Para cambios importantes:
 - 💼 LinkedIn: [linkedin.com/in/cristian-arandab](https://www.linkedin.com/in/cristian-arandab)
 - 🐱 GitHub: [github.com/carandab](https://github.com/carandab)
 - 🌐 Portafolio: [portafolio-cristian-aranda.onrender.com](https://portafolio-cristian-aranda.onrender.com/)
+- 🌐 Behance: [behance.net/carandab](https://www.behance.net/carandab)
 
 ---
 
